@@ -1,9 +1,3 @@
 module.exports={
-    'database':{
-        connectionLimit : 10,
-        host : 'localhost',
-        user: 'root',
-        password : '1234',
-        database : 'db_turismo'
-    }
+    'database': new Sequelize('mysql://root:1234@localhost:3306/db_turismo')
 }

@@ -12,13 +12,13 @@ module.exports=function(app){
                res.json(usuario); 
             });
 		},
-        login:function(peticion,respuesta){
+        login:function(req,res){
             var Usuario = app.get("usuario");
-            Usuario.find(req.body.idUsuario).then(function(usuario){
-               if(usuario){
-                   res.json(usuario);
-               }
-            });
+            Usuario.findAll({
+                where:{nick: req.body.nick, contraseña: req.body.contraseña}
+            }).then(function(usuarios){
+              res.json(usuarios[0]); 
+            })
 		},
         list:function(req,res){
             var Usuario = app.get("usuario");
@@ -46,17 +46,20 @@ module.exports=function(app){
         },
         delete:function(req,res){
             var Usuario = app.get('usuario');
+            
             Usuario.destroy({
                where: {
                    idUsuario: req.body.idUsuario
                } 
             }).then(function(usuario){
-                res.json(usuarios);
+                Usuario.findAll().then(function(usuarios){
+                    res.json(usuarios);
+                })
             });
         },
         find:function(req,res){
            var Usuario = app.get('usuario');
-            Departamento.find(req.body.idUsuario).then(function(usuario){
+            Departamento.findById(req.body.idUsuario).then(function(usuario){
                 if(usuario){
                     res.json(usuario);
                 } else {

@@ -16,7 +16,7 @@ module.exports = function(app){
         },
         edit:function(req,res){
             var Departamento = app.get('departamento');
-            Departamento.find(req.body.idDepartamento).then(function(departamento){
+            Departamento.findById(req.body.idDepartamento).then(function(departamento){
                 if(departamento){
                     departamento.updateAttributes({
                         nombre: req.body.nombre
@@ -35,12 +35,14 @@ module.exports = function(app){
                    idDepartamento: req.body.idDepartamento
                } 
             }).then(function(departamento){
-                res.json(departamentos);
+                Departamento.findAll().then(function(departamentos){
+                    res.json(departamentos);
+                });
             });
         },
         find:function(req,res){
            var Departamento = app.get('departamento');
-            Departamento.find(req.body.id_departamento).then(function(departamento){
+            Departamento.findById(req.body.idDepartamento).then(function(departamento){
                 if(departamento){
                     res.json(departamento);
                 } else {
@@ -51,7 +53,7 @@ module.exports = function(app){
         superList(req,res){
             var Departamento = app.get('departamento');
             var LugarTuristico = app.get('lugarTuristico');
-            Departamento.find({ where: {idDepartamento: req.paramas.id}, include: [LugarTuristico]}).then(function(departamento){
+            Departamento.find({ where: {idDepartamento: req.params.id}, include: [LugarTuristico]}).then(function(departamento){
                 res.json(departamento);
             })
         }

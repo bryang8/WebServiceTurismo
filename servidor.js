@@ -51,6 +51,7 @@
     
     var LugarTuristico = sequelize.define('lugarTuristico',{
         idLugarTuristico :{type: Sequelize.INTEGER, field : 'idLugarTuristico', primaryKey: true, autoIncrement: true},
+        nombre: {type: Sequelize.STRING, field: 'nombre', allowNull: false},
         direccion:{type: Sequelize.STRING, field: 'direccion', allowNull : false},
         descripcion:{type: Sequelize.STRING, field: 'descripcion', allowNull : false},
         idDepartamento : {type: Sequelize.INTEGER , references:{
@@ -143,6 +144,7 @@
     app.set('comentario', Comentario);
     app.set('imagen', Imagen);
     app.set('rol', Rol);
+    
     
     app.listen(puerto,function(){
 		console.log("Servidor iniciado en el puerto: "+puerto);

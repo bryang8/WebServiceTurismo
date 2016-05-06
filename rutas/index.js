@@ -5,7 +5,7 @@ module.exports=(function(app){
     */
     var usuario=require('../controller/UsuarioController.js')(app);
     var departamento = require('../controller/DepartamentoController.js')(app);
-    var lugaresTuristicos = require('../controller/LugarController.js')(app);
+    var lugar = require('../controller/LugarController.js')(app);
     
     /*
         Ruta primaria
@@ -31,6 +31,15 @@ module.exports=(function(app){
     ruta.put('/departamento/edit', departamento.edit);
     ruta.delete('/departamento/delete', departamento.delete);
     ruta.get('/departamento/superList', departamento.superList);
+    
+    
+    /*
+        Rutas Lugares Turisticos
+    */
+    ruta.get('/lugar/list', lugar.list);
+    ruta.post('/lugar/add', lugar.add);
+    ruta.put('/lugar/edit', lugar.edit);
+    ruta.delete('/lugar/delete', lugar.delete);
     
     return ruta;
 });

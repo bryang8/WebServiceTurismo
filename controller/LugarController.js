@@ -53,6 +53,20 @@ module.exports = function(app){
                     res.json(lugar);
                 }
             })
+        },
+        lugarHoteles(req,res){
+            var Hotel = app.get('hotel');
+            var LugarTuristico = app.get('lugarTuristico');
+            LugarTuristico.find({ where: {idLugarTuristico: req.params.id}, include: [Hotel]}).then(function(lugar){
+                res.json(lugar);
+            })
+        },
+        lugarComentarios(req,res){
+            var Comentario = app.get('comentario');
+            var LugarTuristico = app.get('lugarTuristico');
+            LugarTuristico.find({ where: {idLugarTuristico: req.params.id}, include: [Comentario]}).then(function(lugar){
+                res.json(lugar);
+            })
         }
     }
 }

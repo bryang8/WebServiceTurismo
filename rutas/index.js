@@ -39,23 +39,26 @@ module.exports=(function(app){
     
     
     /*
-        Rutas Lugares Turisticos
+        Rutas Comentario
     */
     ruta.get('/comentario', comentario.list);
     ruta.post('/comentario', comentario.add);
     ruta.put('/comentario', comentario.edit);
     ruta.delete('/comentario', comentario.delete);
     ruta.get('/comentario/:id', comentario.find);
-
+    
+    
     
     /*
-        Rutas Comentarios
+        Rutas Lugar
     */
     ruta.get('/lugar', lugar.list);
     ruta.post('/lugar', lugar.add);
     ruta.put('/lugar', lugar.edit);
     ruta.delete('/lugar', lugar.delete);
     ruta.get('/lugar/:id', lugar.find);
+    ruta.get('/lugar/:id/hoteles', lugar.lugarHoteles);
+    ruta.get('/lugar/:id/comentarios', lugar.lugarComentarios);
     
     
     /*

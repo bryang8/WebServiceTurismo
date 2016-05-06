@@ -88,7 +88,7 @@
         }}
     },{
         freezeTableName: true,
-        timeStamp: false
+        timestamps: false
     })
     
     var Hotel = sequelize.define('hotel',{
@@ -100,7 +100,7 @@
         }}
     },{
         freezeTableName: true,
-        tiemStamp: false
+        tiemstamps: false
     })
     
     /*
@@ -124,7 +124,7 @@
     LugarTuristico.hasMany(Hotel,{foreignKey: 'idLugarTuristico'}, { constraints: true });
     Hotel.belongsTo(LugarTuristico,{foreignKey: 'idLugarTuristico'},{ constraints: true });
     
-    sequelize.sync({force: true})
+    sequelize.sync({force: false})
     var puerto=3000;
 	var conf=require('./config');
 	var app=express();

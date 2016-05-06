@@ -143,6 +143,7 @@
     app.set('lugarTuristico', LugarTuristico);
     app.set('comentario', Comentario);
     app.set('imagen', Imagen);
+    app.set('hotel', Hotel);
     app.set('rol', Rol);
     
     

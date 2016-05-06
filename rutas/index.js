@@ -7,6 +7,10 @@ module.exports=(function(app){
     var departamento = require('../controller/DepartamentoController.js')(app);
     var lugar = require('../controller/LugarController.js')(app);
     var comentario = require('../controller/ComentarioController.js')(app);
+    var imagen = require('../controller/ImagenController.js')(app);
+    var hotel = require('../controller/HotelController.js')(app);
+    
+    
     /*
         Ruta primaria
     */
@@ -40,6 +44,7 @@ module.exports=(function(app){
     ruta.post('/comentario/add', comentario.add);
     ruta.put('/comentario/edit', comentario.edit);
     ruta.delete('/comentario/delete', comentario.delete);
+    ruta.get('/comentario/find', comentario.find);
 
     
     /*
@@ -49,6 +54,30 @@ module.exports=(function(app){
     ruta.post('/lugar/add', lugar.add);
     ruta.put('/lugar/edit', lugar.edit);
     ruta.delete('/lugar/delete', lugar.delete);
+    ruta.get('/lugar/find', lugar.find);
+    
+    
+    
+    /*
+        Rutas Imagen
+    */
+    ruta.get('/imagen/list', imagen.list);
+    ruta.post('/imagen/add', imagen.add);
+    ruta.put('/imagen/edit', imagen.edit);
+    ruta.delete('/imagen/delete', imagen.delete);
+    ruta.get('/imagen/find', imagen.find);
+    
+    
+    
+    
+    /*
+        Rutas Hotel
+    */
+    ruta.get('/hotel/list', hotel.list);
+    ruta.post('/hotel/add', hotel.add);
+    ruta.put('/hotel/edit', hotel.edit);
+    ruta.delete('/hotel/delete', hotel.delete);
+    ruta.get('/hotel/find', hotel.find);
     
     return ruta;
 });

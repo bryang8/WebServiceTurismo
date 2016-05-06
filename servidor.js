@@ -64,7 +64,7 @@
     });
     
     var Comentario = sequelize.define('comentario',{
-        idComentario :{type: Sequelize.INTEGER, field : 'idLugarTuristico', primaryKey: true, autoIncrement: true},
+        idComentario: {type: Sequelize.INTEGER, field : 'idComentario', primaryKey: true, autoIncrement: true},
         contenido:{type: Sequelize.STRING, field: 'contenido', allowNull : false},
         idUsuario : {type: Sequelize.INTEGER , references:{
             model : Usuario,
@@ -80,9 +80,9 @@
     })
     
     var Imagen = sequelize.define('imagen', {
-        idImagen :{type: Sequelize.INTEGER, field : 'idLugarTuristico', primaryKey: true, autoIncrement: true},
-        contenido:{type: Sequelize.STRING, field: 'contenido', allowNull : false},
-        idLugarTuristico : {type: Sequelize.INTEGER , references:{
+        idImagen : {type: Sequelize.INTEGER, field : 'idImagen', primaryKey: true, autoIncrement: true},
+        contenido: {type: Sequelize.STRING, field : 'contenido', allowNull : false},
+        idLugarTuristico: {type: Sequelize.INTEGER , references:{
             model : LugarTuristico,
             key: 'idLugarTuristico'
         }}
@@ -124,7 +124,7 @@
     LugarTuristico.hasMany(Hotel, {foreignKey: 'idLugarTuristico'});
     Hotel.belongsTo(LugarTuristico, {foreignKey: 'idLugarTuristico'});
     
-    sequelize.sync({force: false})
+    sequelize.sync({force: true})
     var puerto=3000;
 	var conf=require('./config');
 	var app=express();

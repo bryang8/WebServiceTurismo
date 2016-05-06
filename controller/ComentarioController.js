@@ -37,6 +37,9 @@ module.exports = function(app){
                    idComentario: req.body.idComentario
                } 
             });
+            Comentario.findAll().then(function(lugares){
+                res.json(lugares);
+            });
         },
         find:function(req,res){
             var Comentario = app.get('comentario');

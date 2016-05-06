@@ -9,6 +9,7 @@ module.exports=(function(app){
     var comentario = require('../controller/ComentarioController.js')(app);
     var imagen = require('../controller/ImagenController.js')(app);
     var hotel = require('../controller/HotelController.js')(app);
+    var rol = require('../controller/RolController.js')(app);
     
     
     /*
@@ -20,52 +21,51 @@ module.exports=(function(app){
     /*
         Rutas Usuario
     */
-    ruta.post('/usuario/signup',usuario.signup);
-    ruta.post('/usuario/login',usuario.login);
-    ruta.get('/usuario/list',usuario.list);
-    ruta.put('/usuario/edit',usuario.edit);
-    ruta.delete('/usuario/delete',usuario.delete);
-    ruta.get('/usuario/find',usuario.find);
+    ruta.post('/usuario',usuario.signup);
+    ruta.post('/usuario',usuario.login);
+    ruta.get('/usuario',usuario.list);
+    ruta.put('/usuario',usuario.edit);
+    ruta.delete('/usuario',usuario.delete);
+    ruta.get('/usuario/:id',usuario.find);
     
     /*
         Rutas Departamento
     */
-    ruta.get('/departamento/list', departamento.list);
-    ruta.post('/departamento/add', departamento.add);
-    ruta.put('/departamento/edit', departamento.edit);
-    ruta.delete('/departamento/delete', departamento.delete);
-    ruta.get('/departamento/superList', departamento.superList);
+    ruta.get('/departamento', departamento.list);
+    ruta.post('/departamento', departamento.add);
+    ruta.put('/departamento', departamento.edit);
+    ruta.delete('/departamento', departamento.delete);
+    ruta.get('/departamento/:id', departamento.superList);
     
     
     /*
         Rutas Lugares Turisticos
     */
-    ruta.get('/comentario/list', comentario.list);
-    ruta.post('/comentario/add', comentario.add);
-    ruta.put('/comentario/edit', comentario.edit);
-    ruta.delete('/comentario/delete', comentario.delete);
-    ruta.get('/comentario/find', comentario.find);
+    ruta.get('/comentario', comentario.list);
+    ruta.post('/comentario', comentario.add);
+    ruta.put('/comentario', comentario.edit);
+    ruta.delete('/comentario', comentario.delete);
+    ruta.get('/comentario/:id', comentario.find);
 
     
     /*
         Rutas Comentarios
     */
-    ruta.get('/lugar/list', lugar.list);
-    ruta.post('/lugar/add', lugar.add);
-    ruta.put('/lugar/edit', lugar.edit);
-    ruta.delete('/lugar/delete', lugar.delete);
-    ruta.get('/lugar/find', lugar.find);
-    
+    ruta.get('/lugar', lugar.list);
+    ruta.post('/lugar', lugar.add);
+    ruta.put('/lugar', lugar.edit);
+    ruta.delete('/lugar', lugar.delete);
+    ruta.get('/lugar/:id', lugar.find);
     
     
     /*
         Rutas Imagen
     */
-    ruta.get('/imagen/list', imagen.list);
-    ruta.post('/imagen/add', imagen.add);
-    ruta.put('/imagen/edit', imagen.edit);
-    ruta.delete('/imagen/delete', imagen.delete);
-    ruta.get('/imagen/find', imagen.find);
+    ruta.get('/imagen', imagen.list);
+    ruta.post('/imagen', imagen.add);
+    ruta.put('/imagen', imagen.edit);
+    ruta.delete('/imagen', imagen.delete);
+    ruta.get('/imagen/:id', imagen.find);
     
     
     
@@ -73,12 +73,18 @@ module.exports=(function(app){
     /*
         Rutas Hotel
     */
-    ruta.get('/hotel/list', hotel.list);
-    ruta.post('/hotel/add', hotel.add);
-    ruta.put('/hotel/edit', hotel.edit);
-    ruta.delete('/hotel/delete', hotel.delete);
-    ruta.get('/hotel/find', hotel.find);
+    ruta.get('/hotel', hotel.list);
+    ruta.post('/hotel', hotel.add);
+    ruta.put('/hotel', hotel.edit);
+    ruta.delete('/hotel', hotel.delete);
+    ruta.get('/hotel/:id', hotel.find);
     
+    /*
+        Rutas Rol
+    */
+    
+    ruta.get('/rol', rol.list);
+    ruta.get('/rol/:id', rol.rolUsuarios);
     return ruta;
 });
 

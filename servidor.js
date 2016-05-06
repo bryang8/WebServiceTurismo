@@ -4,7 +4,7 @@
 	var morgan=require('morgan');
 	var mysql=require('mysql');
 	var Sequelize = require('sequelize');
-    var sequelize = new Sequelize('db_turismo','root','1234',{
+    var sequelize = new Sequelize('db_turismo','root','',{
         host: 'localhost',
         dialect: 'mysql',
         pool:{
@@ -35,7 +35,7 @@
         idRol : {type: Sequelize.INTEGER , references:{
             model : Rol,
             key: 'idRol'
-        }}
+        }, allowNull: false}
     },{
         freezeTableName: true,
         timestamps: false
@@ -57,7 +57,7 @@
         idDepartamento : {type: Sequelize.INTEGER , references:{
             model : Departamento,
             key: 'idDepartamento'
-        }}
+        }, allowNull: false}
     },{
         freezeTableName: true,
         timestamps: false
@@ -73,10 +73,10 @@
         idLugarTuristico : {type: Sequelize.INTEGER , references:{
             model : LugarTuristico,
             key: 'idLugarTuristico'
-        }}
+        }, allowNull: false}
     },{
         freezeTableName: true,
-        timeStamp: false
+        timestamps: false
     })
     
     var Imagen = sequelize.define('imagen', {
@@ -106,23 +106,23 @@
     /*
         Relaciones
     */
-    Departamento.hasMany(LugarTuristico, {foreignKey: 'idDepartamento'});
-    LugarTuristico.belongsTo(Departamento, {foreignKey: 'idDepartamento'});
+    Departamento.hasMany(LugarTuristico,{foreignKey: 'idDepartamento'}, { constraints: true });
+    LugarTuristico.belongsTo (Departamento,{foreignKey: 'idDepartamento'}, { constraints: true });
     
-    Rol.hasMany(Usuario, {foreignKey: 'idRol'});
-    Usuario.belongsTo(Rol, {foreignKey: 'idRol'});
+    Rol.hasMany(Usuario, {foreignKey: 'idRol'},{ constraints: true });
+    Usuario.belongsTo(Rol, {foreignKey: 'idRol'},{ constraints: true });
     
-    Usuario.hasMany(Comentario, {foreignKey: 'idUsuario'});
-    Comentario.belongsTo(Usuario, {foreignKey: 'idUsuario'});
+    Usuario.hasMany(Comentario,{foreignKey: 'idUsuario'},{ constraints: true });
+    Comentario.belongsTo(Usuario,{foreignKey: 'idUsuario'},{ constraints: true });
     
-    LugarTuristico.hasMany(Comentario, {foreignKey: 'idLugarTuristico'});
-    Comentario.belongsTo(LugarTuristico, {foreignKey: 'idLugarTuristico'});
+    LugarTuristico.hasMany(Comentario,{foreignKey: 'idLugarTuristico'},{ constraints: true });
+    Comentario.belongsTo(LugarTuristico,{foreignKey: 'idLugarTuristico'},{ constraints: true });
     
-    LugarTuristico.hasMany(Imagen, {foreignKey: 'idLugarTuristico'});
-    Imagen.belongsTo(LugarTuristico, {foreignKey: 'idLugarTuristico'});
+    LugarTuristico.hasMany(Imagen,{foreignKey: 'idLugarTuristico'}, { constraints: true });
+    Imagen.belongsTo(LugarTuristico,{foreignKey: 'idLugarTuristico'},{ constraints: true });
     
-    LugarTuristico.hasMany(Hotel, {foreignKey: 'idLugarTuristico'});
-    Hotel.belongsTo(LugarTuristico, {foreignKey: 'idLugarTuristico'});
+    LugarTuristico.hasMany(Hotel,{foreignKey: 'idLugarTuristico'}, { constraints: true });
+    Hotel.belongsTo(LugarTuristico,{foreignKey: 'idLugarTuristico'},{ constraints: true });
     
     sequelize.sync({force: true})
     var puerto=3000;
@@ -148,7 +148,7 @@
     
     
     app.listen(puerto,function(){
-		console.log("Servidor iniciado en el puerto: "+puerto);
+		console.log("Servidor iniciado en el puerto: " + puerto);
 	});
     
 })();

@@ -48,11 +48,9 @@ module.exports = function(app){
         },
         find:function(req,res){
             var Lugar = app.get('lugarTuristico');
-            Lugar.findById(req.body.idLugarTuristico).then(function(lugar){
+            Lugar.findById(req.params.id).then(function(lugar){
                 if(lugar){
                     res.json(lugar);
-                } else {
-                    
                 }
             })
         }

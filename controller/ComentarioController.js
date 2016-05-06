@@ -43,7 +43,7 @@ module.exports = function(app){
         },
         find:function(req,res){
             var Comentario = app.get('comentario');
-            Comentario.findById(req.body.idComentario).then(function(comentario){
+            Comentario.findById(req.params.id).then(function(comentario){
                 if(comentario){
                     res.json(comentario);
                 }

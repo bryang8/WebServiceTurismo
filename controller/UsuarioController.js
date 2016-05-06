@@ -59,11 +59,9 @@ module.exports=function(app){
         },
         find:function(req,res){
            var Usuario = app.get('usuario');
-            Departamento.findById(req.body.idUsuario).then(function(usuario){
+            Usuario.findById(req.params.id).then(function(usuario){
                 if(usuario){
                     res.json(usuario);
-                } else {
-                    
                 }
             })
         }

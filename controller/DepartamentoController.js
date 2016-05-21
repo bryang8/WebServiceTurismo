@@ -50,7 +50,7 @@ module.exports = function(app){
                 }
             })
         },
-        superList(req,res){
+        superList:function(req,res){
             var Departamento = app.get('departamento');
             var LugarTuristico = app.get('lugarTuristico');
             Departamento.find({ where: {idDepartamento: req.params.id}, include: [LugarTuristico]}).then(function(departamento){

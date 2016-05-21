@@ -54,14 +54,14 @@ module.exports = function(app){
                 }
             })
         },
-        lugarHoteles(req,res){
+        lugarHoteles:function(req,res){
             var Hotel = app.get('hotel');
             var LugarTuristico = app.get('lugarTuristico');
             LugarTuristico.find({ where: {idLugarTuristico: req.params.id}, include: [Hotel]}).then(function(lugar){
                 res.json(lugar);
             })
         },
-        lugarComentarios(req,res){
+        lugarComentarios:function(req,res){
             var Comentario = app.get('comentario');
             var LugarTuristico = app.get('lugarTuristico');
             LugarTuristico.find({ where: {idLugarTuristico: req.params.id}, include: [Comentario]}).then(function(lugar){

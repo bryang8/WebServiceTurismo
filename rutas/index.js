@@ -22,11 +22,16 @@ module.exports=(function(app){
         Rutas Usuario
     */
     ruta.post('/usuario',usuario.signup);
-    ruta.post('/usuario',usuario.login);
+    ruta.post('/login',usuario.login);
+    ruta.get('/token',usuario.tokenGenerator);
+    
+    ruta.use(usuario.tokenMiddleware);
+    
     ruta.get('/usuario',usuario.list);
     ruta.put('/usuario',usuario.edit);
     ruta.delete('/usuario',usuario.delete);
     ruta.get('/usuario/:id',usuario.find);
+    
     
     /*
         Rutas Departamento

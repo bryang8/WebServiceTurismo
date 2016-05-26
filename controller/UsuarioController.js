@@ -1,3 +1,4 @@
+var jwt=require('jsonwebtoken');
 module.exports=function(app){
 	return {
 		signup:function(req,res){
@@ -16,10 +17,36 @@ module.exports=function(app){
             var Usuario = app.get("usuario");
             Usuario.findAll({
                 where:{nick: req.body.nick, contraseña: req.body.contraseña}
-            }).then(function(usuarios){
-              res.json(usuarios[0]); 
-            })
+            }).then(function(data){
+                res.json(genToken(data));
+            }).error(function(err){
+                respuesta.send({"message":"Error"+err,"status":"500"});
+            });
 		},
+        tokenGenerator:function(req,res){
+            var token=jwt.sign({company:'Kinal'},'S3CUR3@APP')
+            res.send(token);
+        },
+        tokenMiddleware:function(req,res){
+            var token=req.headers['x-access-token'] || req.body.token || req.query.token;
+            if (token){
+                jwt.verify(token,'S3CUR3@APP',function(error,decoded){
+                    if(err){
+                        return res.status(403).send({
+                            success:false,
+                            message:'Fallo al validar token'
+                        });
+                    }
+                    req.user=decoded;
+                    next();
+                });
+            }else{
+                return res.status(403).send({
+                    success:false,
+                    message:'No se proporciono Token'
+                })
+            }
+        },
         list:function(req,res){
             var Usuario = app.get("usuario");
             Usuario.findAll().then(function(usuarios){
@@ -66,4 +93,20 @@ module.exports=function(app){
             })
         }
     }
+}
+function expiresIn(días){
+    var dateObj=new Date();
+    return dateObj.setDate(dateObj.getDate()+días);
+}
+function genToken(user){
+    var payload=jwt.sign({
+        "company":"kinal"
+    },
+      'S3CUR3@APP');
+    var token={
+        "token":payload,
+        "user":user,
+        "exp":expiresIn(1)
+    }
+    return token;
 }
